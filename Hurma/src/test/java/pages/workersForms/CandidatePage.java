@@ -1,5 +1,6 @@
-package pages;
+package pages.workersForms;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -20,5 +21,9 @@ public class CandidatePage {
     public CandidatePage asseptDeleting(){
         $(By.id("soft-remove-candidate")).click();
         return this;
+    }
+
+    public static Boolean isCandidateRemoved(){
+        return $(By.id("removedBlockLabel")).shouldBe(Condition.visible).isDisplayed();
     }
 }

@@ -1,8 +1,6 @@
-package pages;
+package pages.workersForms;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -10,9 +8,9 @@ import static com.codeborne.selenide.Selenide.*;
 public class CreateEmployeePage {
 
     public static String checkCreatedByName(){
-
         return $(By.xpath("//h1[contains(@class,'mr-6')]")).shouldHave(Condition.enabled, Condition.visible).getText();
     }
+
     public CreateEmployeePage clickToTheRespHr(){
         executeJavaScript("window.scrollBy(0,document.body.scrollHeight)");
         $(By.xpath("//div[@aria-owns='list-68']")).click();
@@ -51,31 +49,9 @@ public class CreateEmployeePage {
         return this;
     }
 
-    public CreateEmployeePage clickSubmitButton(){
+    public AnyWorkerForm clickSubmitButton(){
         $(By.xpath("//div[contains(@class,'footer')]//button[@data-mdja]")).click();
-        return this;
+        return new AnyWorkerForm();
     }
-
-    public CreateEmployeePage clickEllipsis(){
-        $(By.xpath("//button[@data-mdja='01-06']")).click();
-        return this;
-    }
-
-    public CreateEmployeePage clickRemove(){
-        $(By.id("list-item-180")).click();
-        return this;
-    }
-
-    public CreateEmployeePage removeEmployee(){
-        $(By.id("input-189")).click();
-        var enabledDates = $$(By.xpath("//button[@class='v-btn v-btn--text v-btn--rounded theme--light']"));
-        enabledDates.get(enabledDates.size()-1).click();
-        $(By.xpath("//div[@class='content-select']")).click();
-        var variousForRemove = $$(By.xpath("//div//p[@class='name']"));
-        variousForRemove.get(variousForRemove.size()-1).click();
-        $(By.xpath("//button//span[contains(text(),'Уволить')]")).click();
-        return this;
-    }
-
 
 }

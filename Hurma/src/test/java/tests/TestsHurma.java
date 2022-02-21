@@ -1,17 +1,21 @@
 package tests;
 
 import org.junit.Assert;
-import org.junit.Test;
-import pages.CreateEmployeePage;
+import org.testng.annotations.Test;
+import pages.EmployeesPage;
+import pages.workersForms.AnyWorkerForm;
+import pages.workersForms.CandidatePage;
+import pages.workersForms.CreateEmployeePage;
 import pages.MainPage;
+import resources.TestData;
 import utils.RandomUtils;
 
 public class TestsHurma extends BaseTest{
 
     public MainPage mainPage = new MainPage();
     String randomStr = RandomUtils.RandomString(10);
-    String emailRnd = String.format("%s@gmail.com",RandomUtils.RandomString(5));
-    String nameWithNum = String.format("Тестовый Сотрудник %s",RandomUtils.RandomInt(10));
+    EmployeesPage employeesPage = new EmployeesPage();
+
 
     @Test
     public void CreatedEmployeeTest(){
@@ -19,14 +23,15 @@ public class TestsHurma extends BaseTest{
                 .clickToTheCompanyTab()
                 .clickCreateButton()
                 .clickToTheRespHr()
-                .selectRole("Сотрудник")
-                .enterName(nameWithNum)
-                .enterEmail(emailRnd)
+                .selectRole(TestData.employee)
+                .enterName(String.format("Тестовый Сотрудник %s",RandomUtils.RandomInt(10)))
+                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
                 .enterResponsible(randomStr)
                 .selectDateForTrainee()
-                .clickSubmitButton();
+                .clickSubmitButton()
+                .clickByCompanyField();
 
-        Assert.assertEquals("Employee doesn't created",nameWithNum,CreateEmployeePage.checkCreatedByName());
+        Assert.assertTrue("Employee doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.employee));
     }
 
     @Test
@@ -35,14 +40,15 @@ public class TestsHurma extends BaseTest{
                 .clickToTheCompanyTab()
                 .clickCreateButton()
                 .clickToTheRespHr()
-                .selectRole("Рекрутер")
-                .enterName(nameWithNum)
-                .enterEmail(emailRnd)
+                .selectRole(TestData.recruiter)
+                .enterName(String.format("Тестовый Рекрутер %s",RandomUtils.RandomInt(10)))
+                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
                 .enterResponsible(randomStr)
                 .selectDateForTrainee()
-                .clickSubmitButton();
+                .clickSubmitButton()
+                .clickByCompanyField();
 
-        Assert.assertEquals("Recruiter doesn't created",nameWithNum,CreateEmployeePage.checkCreatedByName());
+        Assert.assertTrue("Recruiter doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.recruiter));
     }
 
     @Test
@@ -51,14 +57,15 @@ public class TestsHurma extends BaseTest{
                 .clickToTheCompanyTab()
                 .clickCreateButton()
                 .clickToTheRespHr()
-                .selectRole("Менеджер команды")
-                .enterName(nameWithNum)
-                .enterEmail(emailRnd)
+                .selectRole(TestData.managerOfTeam)
+                .enterName(String.format("Тестовый Менеджер команды %s",RandomUtils.RandomInt(10)))
+                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
                 .enterResponsible(randomStr)
                 .selectDateForTrainee()
-                .clickSubmitButton();
+                .clickSubmitButton()
+                .clickByCompanyField();
 
-        Assert.assertEquals("Manager of team doesn't created",nameWithNum,CreateEmployeePage.checkCreatedByName());
+        Assert.assertTrue("Manager of team doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.managerOfTeam));
     }
 
     @Test
@@ -67,14 +74,15 @@ public class TestsHurma extends BaseTest{
                 .clickToTheCompanyTab()
                 .clickCreateButton()
                 .clickToTheRespHr()
-                .selectRole("Менеджер компании")
-                .enterName(nameWithNum)
-                .enterEmail(emailRnd)
+                .selectRole(TestData.managerOfCompany)
+                .enterName(String.format("Тестовый Менеджер компании %s",RandomUtils.RandomInt(10)))
+                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
                 .enterResponsible(randomStr)
                 .selectDateForTrainee()
-                .clickSubmitButton();
+                .clickSubmitButton()
+                .clickByCompanyField();
 
-        Assert.assertEquals("Manager of company doesn't created",nameWithNum,CreateEmployeePage.checkCreatedByName());
+        Assert.assertTrue("Manager of company doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.managerOfCompany));
     }
 
     @Test
@@ -83,14 +91,15 @@ public class TestsHurma extends BaseTest{
                 .clickToTheCompanyTab()
                 .clickCreateButton()
                 .clickToTheRespHr()
-                .selectRole("HR")
-                .enterName(nameWithNum)
-                .enterEmail(emailRnd)
+                .selectRole(TestData.hr)
+                .enterName(String.format("Тестовый Менеджер компании %s",RandomUtils.RandomInt(10)))
+                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
                 .enterResponsible(randomStr)
                 .selectDateForTrainee()
-                .clickSubmitButton();
+                .clickSubmitButton()
+                .clickByCompanyField();
 
-        Assert.assertEquals("HR doesn't created",nameWithNum,CreateEmployeePage.checkCreatedByName());
+        Assert.assertTrue("HR doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.hr));
     }
 
     @Test
@@ -99,14 +108,25 @@ public class TestsHurma extends BaseTest{
                 .clickToTheCompanyTab()
                 .clickCreateButton()
                 .clickToTheRespHr()
-                .selectRole("Администратор")
-                .enterName(nameWithNum)
-                .enterEmail(emailRnd)
+                .selectRole(TestData.admin)
+                .enterName(String.format("Тестовый Менеджер компании %s",RandomUtils.RandomInt(10)))
+                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
                 .enterResponsible(randomStr)
                 .selectDateForTrainee()
-                .clickSubmitButton();
+                .clickSubmitButton()
+                .clickByCompanyField();
 
-        Assert.assertEquals("Admin doesn't created",nameWithNum,CreateEmployeePage.checkCreatedByName());
+        Assert.assertTrue("Admin doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.admin));
+    }
+
+    @Test
+    public void EMAIL(){
+
+    }
+
+    @Test
+    public void LOGEMAIL(){
+
     }
 
     @Test
@@ -114,7 +134,7 @@ public class TestsHurma extends BaseTest{
         mainPage
                 .clickToTheCompanyTab()
                 .selectPage(9)
-                .selectEmployee()
+                .selectTestEmployee()
                 .clickEllipsis()
                 .clickRemove()
                 .removeEmployee();
@@ -132,7 +152,7 @@ public class TestsHurma extends BaseTest{
                 .clickToTheThreeDots()
                 .deletedFromRemoved()
                 .asseptDeleting();
-        //добавить ассерт
+        Assert.assertTrue("Candidate wasnt removed",CandidatePage.isCandidateRemoved());
     }
 
     @Test
@@ -140,7 +160,58 @@ public class TestsHurma extends BaseTest{
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
-                .selectProbation();
-        //добавить ассерт
+                .selectProbation()
+                .selectEmployee()
+                .clickByCompanyField();
+        Assert.assertTrue("Doesn't sorted by probation",AnyWorkerForm.checkTextFromFieldByInformationField("Исп. период"));
+    }
+
+    @Test
+    public void SortedByCooperationTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectCooperation()
+                .selectEmployee()
+                .clickByCompanyField();
+
+        Assert.assertTrue("Doesn't sorted by cooperation",AnyWorkerForm.checkTextFromFieldByInformationField("Сотрудник"));
+
+    }
+
+    @Test
+    public void SortedByFinishCooperationTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectFinishOfCooperation()
+                .selectEmployee();
+
+        Assert.assertTrue("Doesn't sorted by cooperation",AnyWorkerForm.isDisplayedLabelSoonRemove());
+    }
+
+    @Test
+    public void SortedByTeamTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectByTeam()
+                .selectTeam();
+                //.selectEmployee();
+
+        //Assert.assertTrue("Doesn't sorted by cooperation",AnyWorkerForm.checkTextFromFieldByInformationField(team));
+    }
+
+    @Test
+    public void SortedByPlaceTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectByPlace()
+                .selectCountry()
+                .selectEmployee()
+                .clickByCompanyField();
+
+        Assert.assertTrue("Doesn't sorted by cooperation",AnyWorkerForm.checkTextFromFieldByInformationField("sasdas"));
     }
 }
