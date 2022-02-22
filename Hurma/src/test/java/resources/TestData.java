@@ -1,6 +1,5 @@
 package resources;
 
-import jdk.jfr.Description;
 
 public class TestData {
     public static String managerOfTeam = "Менеджер команды";

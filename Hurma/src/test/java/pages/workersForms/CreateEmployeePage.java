@@ -54,4 +54,14 @@ public class CreateEmployeePage {
         return new AnyWorkerForm();
     }
 
+    public CreateEmployeePage clickByTeam(){
+        actions().moveToElement($$(By.xpath("//div[@class='item-desc']")).get(5)).click();
+        return this;
+    }
+
+    public  CreateEmployeePage selectTeam(){
+        $(By.id("input-144")).click();
+        return this;
+    }
+
 }

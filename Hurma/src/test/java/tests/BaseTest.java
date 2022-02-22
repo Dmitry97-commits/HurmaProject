@@ -14,7 +14,6 @@ public class BaseTest {
     public void setUp() throws Exception {
         Selenide.open(ResourcesUtils.getResources("configs","mainUrl"));
         Configuration.holdBrowserOpen = true;
-        //Configuration.pageLoadStrategy = "none";
         Configuration.timeout = Long.parseLong(ResourcesUtils.getResources("configs","timeout"));
         loginPage
                 .enterEmail(ResourcesUtils.getResources("configs","email"))
@@ -25,6 +24,8 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown(){
+        //Selenide.clearBrowserCookies();
+        //Selenide.clearBrowserLocalStorage();
         Selenide.closeWebDriver();
     }
 }

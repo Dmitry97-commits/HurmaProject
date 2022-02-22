@@ -1,7 +1,7 @@
 package pages.workersForms;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -9,15 +9,41 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class AnyWorkerForm {
 
+    private SelenideElement getFieldFromForm(String nameOfField){
+        return $(By.xpath(String.format("//h3[contains(@class,'expansion-panel')]//div[contains(text(),'%s')]",nameOfField)));
+    }
+
     public AnyWorkerForm clickByCompanyField(){
-        $(By.xpath("//h3[contains(@class,'expansion-panel')]//div[contains(text(),'Компания')]")).click();
+        getFieldFromForm("Компания").click();
+        return this;
+    }
+
+    public AnyWorkerForm clickByPlaceOfLifeField(){
+        getFieldFromForm("Место проживания").click();
+        return this;
+    }
+
+    public AnyWorkerForm clickBySkillsAndAwards(){
+        getFieldFromForm("Награды и навыки").click();
+        return this;
+    }
+
+    public AnyWorkerForm clickByLanguagesAndEducation(){
+        getFieldFromForm("Образование и языки").click();
+        return this;
+    }
+
+    public AnyWorkerForm clickByAgeAndSex(){
+        getFieldFromForm("Возраст и пол").click();
         return this;
     }
 
     public static Boolean checkTextFromFieldByInformationField(String expectedValue){
-        var x = $(By.xpath(String.format("//li[@class='user-info__item']//span[contains(text(),'%s')]",expectedValue)));
-        System.out.println(x.getText());
-        return x.isDisplayed();
+        return $(By.xpath(String.format("//li[@class='user-info__item']//span[contains(text(),'%s')]",expectedValue))).isDisplayed();
+    }
+
+    public static Boolean checkTextFromFieldByInformationFieldIsEmpty(String expectedValue){
+        return $(By.xpath(String.format("//li[@class='user-info__item']//span[contains(text(),'%s')]",expectedValue))).shouldBe(Condition.not(Condition.visible)).isDisplayed();
     }
 
     public AnyWorkerForm clickEllipsis(){
@@ -44,4 +70,13 @@ public class AnyWorkerForm {
     public static Boolean isDisplayedLabelSoonRemove(){
         return $(By.xpath("//span[@class='v-chip__content']")).shouldBe(Condition.visible).isDisplayed();
     }
+
+    public static Boolean checkTags(String tag){
+        return $(By.xpath(String.format("//span[@title='%s']//span",tag))).shouldBe(Condition.visible).isDisplayed();
+    }
+
+    public static Boolean checkExEmployeeLabel(){
+        return $(By.id("removedBlockLabel")).isDisplayed();
+    }
+
 }
