@@ -10,6 +10,8 @@ import pages.workersForms.AnyWorkerForm;
 import pages.workersForms.CreateEmployeePage;
 import utils.RandomUtils;
 
+import java.util.Objects;
+
 import static com.codeborne.selenide.Selenide.*;
 
 public class EmployeesPage {
@@ -17,6 +19,7 @@ public class EmployeesPage {
     private final ElementsCollection listOfEmployees = $$(By.xpath("//a[@class='name']"));
     private final ElementsCollection listOfTestEmployees = $$(By.xpath("//a[contains(@class,'name') and contains(text(),'Тест')]"));
     private final ElementsCollection listOfFilterParams= $$(By.xpath("//div[@class='filter-title-block__activator']"));
+    private final SelenideElement labelOfLoading = $(By.xpath("//div[@class='v-overlay__scrim']"));
 
     private SelenideElement selectParamFromDropDownContainer(String name){
         return $(By.xpath(String.format("//div[@class='filter-options__item']//p[contains(text(),'%s')]",name)));
@@ -67,6 +70,61 @@ public class EmployeesPage {
         return this;
     }
 
+    public EmployeesPage selectByDateOfBirthday(){
+        listOfFilterParams.get(3).click();
+        return this;
+    }
+
+    public EmployeesPage selectMonthOfDateOfBirthday(){
+        selectParamFromDropDownContainer("Март").click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage selectByAbsenceFromWork(){
+        listOfFilterParams.get(4).click();
+        return this;
+    }
+
+    public EmployeesPage selectAbsence(){
+        selectParamFromDropDownContainer("Ночная смена").click();
+        listOfEmployees.shouldBe(CollectionCondition.size(1));
+        return this;
+    }
+
+    public EmployeesPage selectByRoleInSystem(){
+        listOfFilterParams.get(5).click();
+        return this;
+    }
+
+    public EmployeesPage selectRole(){
+        selectParamFromDropDownContainer("Администратор").click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage selectByMaritalStatus(){
+        listOfFilterParams.get(7).click();
+        return this;
+    }
+
+    public EmployeesPage selectMaritalStatus(){
+        selectParamFromDropDownContainer("Вдовец").click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage selectByExperience(){
+        listOfFilterParams.get(8).click();
+        return this;
+    }
+
+    public EmployeesPage selectExperience(){
+        selectParamFromDropDownContainer("10+ лет").click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
     public String selectTeam(){
         var listOfTeams = $$(By.xpath("//div[@class='filter-options__item']")).shouldBe(CollectionCondition.sizeGreaterThan(0));
         var team = listOfTeams.get(listOfTeams.size()-1);
@@ -82,6 +140,7 @@ public class EmployeesPage {
 
     public EmployeesPage selectCountry(){
         selectParamFromDropDownContainer("Великобритания").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
@@ -92,7 +151,8 @@ public class EmployeesPage {
 
     public EmployeesPage selectTag(){
        selectParamFromDropDownContainer(".NET Core").click();
-        return this;
+        labelOfLoading.shouldBe(Condition.visible);
+       return this;
     }
 
     public EmployeesPage selectByEvent(){
@@ -102,6 +162,7 @@ public class EmployeesPage {
 
     public EmployeesPage selectEvent(){
         selectParamFromDropDownContainer("1:1").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
@@ -116,6 +177,7 @@ public class EmployeesPage {
 
     public EmployeesPage selectLevel(){
         selectParamFromDropDownContainer("Junior").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
@@ -126,6 +188,7 @@ public class EmployeesPage {
 
     public EmployeesPage selectResponsible(){
         selectParamFromDropDownContainer("тест").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
@@ -136,16 +199,37 @@ public class EmployeesPage {
 
     public EmployeesPage selectSkill(){
         selectParamFromDropDownContainer("UI/UX").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage clickCheckBoxEmployee(){
         $(By.id("input-41")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage clickCheckBoxExEmployee(){
         $(By.id("input-46")).click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage clickCheckBoxEmployeeFormOfWork(){
+        $(By.id("input-127")).click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage clickCheckBoxWithoutFormOfWork(){
+        $(By.id("input-122")).click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage clickCheckBoxFlptFormOfWork(){
+        $(By.id("input-132")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
@@ -165,17 +249,18 @@ public class EmployeesPage {
 
     public EmployeesPage selectLevelOfLanguage(){
         selectParamFromDropDownContainer("Beginner").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage clickCheckBoxWithoutAge(){
         $(By.id("input-60")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage clickCheckBoxAge(){
         $(By.xpath("//label[contains(text(),'Задать значение')]")).click();
-
         return this;
     }
 
@@ -200,8 +285,33 @@ public class EmployeesPage {
         return this;
     }
 
-    public EmployeesPage selectPeriod(){
+    public EmployeesPage selectPeriodLastYear(){
         $(By.xpath("//div[contains(@class,'datepicker-options')]//p[contains(text(),'Прошедший год')]")).click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage selectPeriod(){
+        $(By.xpath("//div[contains(@class,'datepicker-options')]//p[contains(text(),'Выбрать период')]")).click();
+        return this;
+    }
+
+    public EmployeesPage enterTodayDay(){
+        $(By.xpath("//table//button[@type='button' and contains(@class, 'outlined')]")).click();
+        actions().sendKeys(Keys.ENTER).perform();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage selectChildrenYes(){
+        $(By.xpath("//label[contains(text(),'Есть дети')]")).click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage selectChildrenNo(){
+        $(By.xpath("//label[contains(text(),'Нет детей')]")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 }

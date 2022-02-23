@@ -6,6 +6,8 @@ import org.testng.annotations.*;
 import pages.LoginPage;
 import utils.ResourcesUtils;
 
+import static com.codeborne.selenide.WebDriverRunner.clearBrowserCache;
+
 public class BaseTest {
 
     public LoginPage loginPage = new LoginPage();
@@ -20,10 +22,12 @@ public class BaseTest {
                 .enterPassword(ResourcesUtils.getResources("configs","password"))
                 .clickSubmit();
 
+
     }
 
     @AfterMethod
     public void tearDown(){
+        //clearBrowserCache();
         //Selenide.clearBrowserCookies();
         //Selenide.clearBrowserLocalStorage();
         Selenide.closeWebDriver();

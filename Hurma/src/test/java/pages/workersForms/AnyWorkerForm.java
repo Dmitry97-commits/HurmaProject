@@ -1,5 +1,6 @@
 package pages.workersForms;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -39,7 +40,7 @@ public class AnyWorkerForm {
     }
 
     public static Boolean checkTextFromFieldByInformationField(String expectedValue){
-        return $(By.xpath(String.format("//li[@class='user-info__item']//span[contains(text(),'%s')]",expectedValue))).isDisplayed();
+        return $(By.xpath(String.format("//li[@class='user-info__item']//span[contains(text(),'%s')]",expectedValue))).shouldBe(Condition.visible).isDisplayed();
     }
 
     public static Boolean checkTextFromFieldByInformationFieldIsEmpty(String expectedValue){
@@ -77,6 +78,28 @@ public class AnyWorkerForm {
 
     public static Boolean checkExEmployeeLabel(){
         return $(By.id("removedBlockLabel")).isDisplayed();
+    }
+
+    public AnyWorkerForm clickByPersonalInfoTab(){
+        $(By.xpath("//a[@href='#personal-info']")).click();
+        return this;
+    }
+
+    public AnyWorkerForm clickByRequestTab(){
+        $(By.xpath("//a[@href='#request']")).click();
+        return this;
+    }
+
+    public static Boolean checkHavingChildren(){
+        return $$(By.xpath("//div[@class='v-expansion-panel-content']//li[@class='user-info__item']")).size()>=2;
+    }
+
+    public static Boolean requestIsDisplayed(){
+        return $(By.xpath("//tr//span[contains(text(),'Ночная смена')]")).shouldBe(Condition.visible).isDisplayed();
+    }
+
+    public static Boolean checkMaritalStatus(){
+        return $(By.xpath("//li[@class='user-info__item']")).shouldBe(Condition.visible).isDisplayed();
     }
 
 }

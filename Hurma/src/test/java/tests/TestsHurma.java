@@ -5,9 +5,9 @@ import org.testng.annotations.Test;
 import pages.EmployeesPage;
 import pages.workersForms.AnyWorkerForm;
 import pages.workersForms.CandidatePage;
-import pages.workersForms.CreateEmployeePage;
 import pages.MainPage;
 import resources.TestData;
+import utils.DateUtils;
 import utils.RandomUtils;
 
 public class TestsHurma extends BaseTest{
@@ -132,12 +132,12 @@ public class TestsHurma extends BaseTest{
     @Test(priority = 9)
     public void RemoveEmployeeTest(){
         mainPage
-                .clickToTheCompanyTab()
-                .selectPage(9)
-                .selectTestEmployee()
-                .clickEllipsis()
-                .clickRemove()
-                .removeEmployee();
+                .clickToTheCompanyTab();
+                //.selectPage(9);
+               // .selectTestEmployee()
+                //.clickEllipsis()
+                //.clickRemove()
+                //.removeEmployee();
         //кандидат появляется на след день ?????
     }
 
@@ -351,16 +351,151 @@ public class TestsHurma extends BaseTest{
                 .clickToTheCompanyTab()
                 .clickToFilter()
                 .clickByDateStartedWork()
-                .selectPeriod()
-                .selectEmployee()
+                .selectPeriodLastYear()
+                .selectTestEmployee()
                 .clickByCompanyField();
-                //.enterAgeLowBorder("32");
-        //enterAgeHighBorder("33")
-        //.selectTestEmployee()
-        //.clickByAgeAndSex();
 
-        //Assert.assertTrue("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationFieldIsEmpty("dasda"));
 
+        Assert.assertTrue("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationField("2021"));
     }
 
+    @Test(priority = 27)
+    public void SortedByStartWorkDateWithAnotherParamTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .clickByDateStartedWork()
+                .selectPeriod()
+                .enterTodayDay()
+                .selectTestEmployee()
+                .clickByCompanyField();
+
+        Assert.assertTrue("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationField(DateUtils.getTodayDate()));
+    }
+
+    @Test(priority = 28)
+    public void SortedByHavingChildrenTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectChildrenYes()
+                .selectTestEmployee()
+                .clickByPersonalInfoTab();
+
+        Assert.assertTrue("Doesn't sorted by having children",AnyWorkerForm.checkHavingChildren());
+    }
+
+    @Test(priority = 29)
+    public void SortedByNotHavingChildrenTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectChildrenNo()
+                .selectEmployee()
+                .clickByPersonalInfoTab();
+
+        Assert.assertFalse("Doesn't sorted by not a having children",AnyWorkerForm.checkHavingChildren());
+    }
+
+    @Test(priority = 30)
+    public void SortedByDateOfBirthDayTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectByDateOfBirthday()
+                .selectMonthOfDateOfBirthday()
+                .selectEmployee()
+                .clickByAgeAndSex();
+
+        Assert.assertTrue("Doesn't sorted by date of birthday ",AnyWorkerForm.checkTextFromFieldByInformationField("мар"));
+    }
+
+    @Test(priority = 31)
+    public void SortedByAbsenceFromWorkTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectByAbsenceFromWork()
+                .selectAbsence()
+                .selectEmployee()
+                .clickByRequestTab();
+
+
+        Assert.assertTrue("Doesn't sorted by date of absence",AnyWorkerForm.requestIsDisplayed());
+    }
+
+    @Test(priority = 32)
+    public void SortedByRoleInSystemTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectByRoleInSystem()
+                .selectRole()
+                .selectTestEmployee()
+                .clickByCompanyField();
+
+        Assert.assertTrue("Doesn't sorted by role",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.admin));
+    }
+
+    @Test(priority = 33)
+    public void SortedByMaritalStatusTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectByMaritalStatus()
+                .selectMaritalStatus()
+                .selectTestEmployee()
+                .clickByPersonalInfoTab();
+
+        Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkMaritalStatus());
+    }
+
+    @Test(priority = 34)
+    public void SortedByExperienceTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .selectByExperience()
+                .selectExperience()
+                .selectTestEmployee()
+                .clickByCompanyField();
+
+        Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkTextFromFieldByInformationField("2010"));
+    }
+
+    @Test(priority = 35)
+    public void SortedByFormOfCooperationEmpTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .clickCheckBoxEmployeeFormOfWork()
+                .selectEmployee()
+                .clickByCompanyField();
+
+        Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.employee));
+    }
+
+    @Test(priority = 36)
+    public void SortedByFormOfCooperationWithoutTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .clickCheckBoxWithoutFormOfWork()
+                .selectTestEmployee()
+                .clickByCompanyField();
+
+        Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkTextFromFieldByInformationField("Внештатный"));
+    }
+
+    @Test(priority = 37)
+    public void SortedByFormOfCooperationFlpTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .clickCheckBoxFlptFormOfWork()
+                .selectEmployee()
+                .clickByCompanyField();
+
+        Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkTextFromFieldByInformationField("ФЛП"));
+    }
 }
