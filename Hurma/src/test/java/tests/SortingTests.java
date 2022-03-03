@@ -1,177 +1,38 @@
 package tests;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.testng.annotations.Test;
 import pages.EmployeesPage;
-import pages.workersForms.AnyWorkerForm;
-import pages.workersForms.CandidatePage;
 import pages.MainPage;
+import pages.workersForms.AnyWorkerForm;
 import resources.TestData;
 import utils.DateUtils;
-import utils.RandomUtils;
 
-public class TestsHurma extends BaseTest{
+public class SortingTests extends BaseTest{
 
     public MainPage mainPage = new MainPage();
-    String randomStr = RandomUtils.RandomString(10);
     EmployeesPage employeesPage = new EmployeesPage();
 
-
     @Test(priority = 1)
-    public void CreatedEmployeeTest(){
-        mainPage
-                .clickToTheCompanyTab()
-                .clickCreateButton()
-                .clickToTheRespHr()
-                .selectRole(TestData.employee)
-                .enterName(String.format("Тестовый Сотрудник %s",RandomUtils.RandomInt(10)))
-                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
-                .enterResponsible(randomStr)
-                .selectDateForTrainee()
-                .clickSubmitButton()
-                .clickByCompanyField();
-
-        Assert.assertTrue("Employee doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.employee));
-    }
-
-    @Test(priority = 2)
-    public void CreatedRecruiterTest(){
-        mainPage
-                .clickToTheCompanyTab()
-                .clickCreateButton()
-                .clickToTheRespHr()
-                .selectRole(TestData.recruiter)
-                .enterName(String.format("Тестовый Рекрутер %s",RandomUtils.RandomInt(10)))
-                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
-                .enterResponsible(randomStr)
-                .selectDateForTrainee()
-                .clickSubmitButton()
-                .clickByCompanyField();
-
-        Assert.assertTrue("Recruiter doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.recruiter));
-    }
-
-    @Test(priority = 3)
-    public void CreatedManagerOfTeamTest(){
-        mainPage
-                .clickToTheCompanyTab()
-                .clickCreateButton()
-                .clickToTheRespHr()
-                .selectRole(TestData.managerOfTeam)
-                .enterName(String.format("Тестовый Менеджер команды %s",RandomUtils.RandomInt(10)))
-                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
-                .enterResponsible(randomStr)
-                .selectDateForTrainee()
-                .clickSubmitButton()
-                .clickByCompanyField();
-
-        Assert.assertTrue("Manager of team doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.managerOfTeam));
-    }
-
-    @Test(priority = 4)
-    public void CreatedManagerOfCompanyTest(){
-        mainPage
-                .clickToTheCompanyTab()
-                .clickCreateButton()
-                .clickToTheRespHr()
-                .selectRole(TestData.managerOfCompany)
-                .enterName(String.format("Тестовый Менеджер компании %s",RandomUtils.RandomInt(10)))
-                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
-                .enterResponsible(randomStr)
-                .selectDateForTrainee()
-                .clickSubmitButton()
-                .clickByCompanyField();
-
-        Assert.assertTrue("Manager of company doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.managerOfCompany));
-    }
-
-    @Test(priority = 5)
-    public void CreatedHRTest(){
-        mainPage
-                .clickToTheCompanyTab()
-                .clickCreateButton()
-                .clickToTheRespHr()
-                .selectRole(TestData.hr)
-                .enterName(String.format("Тестовый Менеджер компании %s",RandomUtils.RandomInt(10)))
-                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
-                .enterResponsible(randomStr)
-                .selectDateForTrainee()
-                .clickSubmitButton()
-                .clickByCompanyField();
-
-        Assert.assertTrue("HR doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.hr));
-    }
-
-    @Test(priority = 6)
-    public void CreatedAdminTest(){
-        mainPage
-                .clickToTheCompanyTab()
-                .clickCreateButton()
-                .clickToTheRespHr()
-                .selectRole(TestData.admin)
-                .enterName(String.format("Тестовый Менеджер компании %s",RandomUtils.RandomInt(10)))
-                .enterEmail(String.format("%s@gmail.com",RandomUtils.RandomString(5)))
-                .enterResponsible(randomStr)
-                .selectDateForTrainee()
-                .clickSubmitButton()
-                .clickByCompanyField();
-
-        Assert.assertTrue("Admin doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.admin));
-    }
-
-    @Test(priority = 7)
-    public void EMAIL(){
-
-    }
-
-    @Test(priority = 8)
-    public void LOGEMAIL(){
-
-    }
-
-    @Test(priority = 9)
-    public void RemoveEmployeeTest(){
-        mainPage
-                .clickToTheCompanyTab();
-                //.selectPage(9);
-               // .selectTestEmployee()
-                //.clickEllipsis()
-                //.clickRemove()
-                //.removeEmployee();
-        //кандидат появляется на след день ?????
-    }
-
-    @Test(priority = 10)
-    public void DeletingFromRemovedTest(){
-        mainPage
-                .clickToTheCandidatesTab()
-                .clickToFilter()
-                .clickSortedBy()
-                .selectOnlyExEmployee()
-                .selectCandidate()
-                .clickToTheThreeDots()
-                .deletedFromRemoved()
-                .asseptDeleting();
-        Assert.assertTrue("Candidate wasnt removed",CandidatePage.isCandidateRemoved());
-    }
-
-    @Test(priority = 11)
     public void SortedByProbationTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectProbation()
                 .selectEmployee()
                 .clickByCompanyField();
 
-        Assert.assertTrue("Doesn't sorted by probation",AnyWorkerForm.checkTextFromFieldByInformationField("Исп. период"));
+        Assert.assertTrue("Doesn't sorted by probation", AnyWorkerForm.checkTextFromFieldByInformationField("Исп. период"));
     }
 
-    @Test(priority = 12)
+    @Test(priority = 2)
     public void SortedByCooperationTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectCooperation()
                 .selectEmployee()
                 .clickByCompanyField();
@@ -180,35 +41,38 @@ public class TestsHurma extends BaseTest{
 
     }
 
-    @Test(priority = 13)
+    @Test(priority = 3)
     public void SortedByFinishCooperationTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectFinishOfCooperation()
-                .selectEmployee();
+                .selectTestEmployee();
 
         Assert.assertTrue("Doesn't sorted by cooperation",AnyWorkerForm.isDisplayedLabelSoonRemove());
     }
 
-    @Test(priority = 14)
+    @Test(priority = 4)
     public void SortedByTeamTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByTeam();
-                String team = employeesPage.selectTeam();
-                employeesPage.selectTestEmployee()
-                        .clickByCompanyField();
+        String team = employeesPage.selectTeam();
+        employeesPage.selectTestEmployee()
+                .clickByCompanyField();
 
         Assert.assertTrue("Doesn't sorted by team",AnyWorkerForm.checkTextFromFieldByInformationField(team));
     }
 
-    @Test(priority = 15)
+    @Test(priority = 5)
     public void SortedByPlaceTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByPlace()
                 .selectCountry()
                 .selectTestEmployee()
@@ -217,11 +81,12 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by place",AnyWorkerForm.checkTextFromFieldByInformationField("Великобритания, Лондон"));
     }
 
-    @Test(priority = 16)
+    @Test(priority = 6)
     public void SortedByTagTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByTag()
                 .selectTag()
                 .selectTestEmployee();
@@ -229,35 +94,38 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by tag",AnyWorkerForm.checkTags(".NET Core"));
     }
 
-    @Test(priority = 17)
+    @Test(priority = 7)
     public void SortedByEventTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByEvent()
                 .selectEvent();
 
-        Assert.assertTrue("Doesn't sorted by event",EmployeesPage.checkEvent("1:1"));
+        Assert.assertTrue("Doesn't sorted by event", EmployeesPage.checkEvent("1:1"));
     }
 
-    @Test(priority = 18)
+    @Test(priority = 8)
     public void SortedByLevelTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByLevel()
                 .selectLevel()
                 .selectTestEmployee()
                 .clickByCompanyField();
 
-       Assert.assertTrue("Doesn't sorted by level",AnyWorkerForm.checkTextFromFieldByInformationField("Junior"));
+        Assert.assertTrue("Doesn't sorted by level",AnyWorkerForm.checkTextFromFieldByInformationField("Junior"));
     }
 
-    @Test(priority = 19)
+    @Test(priority = 9)
     public void SortedByResponsibleTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByResponsible()
                 .selectResponsible()
                 .selectTestEmployee()
@@ -266,11 +134,12 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by responsible",AnyWorkerForm.checkTextFromFieldByInformationField("тест"));
     }
 
-    @Test(priority = 20)
+    @Test(priority = 10)
     public void SortedBySkillsTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectBySkills()
                 .selectSkill()
                 .selectTestEmployee()
@@ -279,11 +148,12 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by skills",AnyWorkerForm.checkTextFromFieldByInformationField("UI/UX"));
     }
 
-    @Test(priority = 21)
+    @Test(priority = 11)
     public void SortedByExEmployessTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .clickCheckBoxEmployee()
                 .selectEmployee()
                 .clickByCompanyField();
@@ -291,22 +161,24 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by employee",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.employee));
     }
 
-    @Test(priority = 22)
+    @Test(priority = 12)
     public void SortedExByExEmployeesTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .clickCheckBoxExEmployee();
 
         Assert.assertTrue("Doesn't sorted by ex employee",EmployeesPage.checkExEmployee());
 
     }
 
-    @Test(priority = 23)
+    @Test(priority = 13)
     public void SortedLanguageSkillsTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByLanguageSkills()
                 .selectLanguage()
                 .selectLevelOfLanguage()
@@ -317,53 +189,59 @@ public class TestsHurma extends BaseTest{
 
     }
 
-    @Test(priority = 24)
+    @Test(priority = 14)
     public void SortedByWithoutAgeTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .clickCheckBoxWithoutAge()
                 .selectTestEmployee()
                 .clickByAgeAndSex();
 
-        Assert.assertTrue("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationFieldIsEmpty("dasda"));
+        Assert.assertFalse("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationField("Test"));
 
     }
 
-    @Test(priority = 25)
+    @Ignore
+    @Test(priority = 15)
     public void SortedByWithAgeTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .clickCheckBoxAge()
-                .enterAgeLowBorder("32");
-                //enterAgeHighBorder("33")
-                //.selectTestEmployee()
-                //.clickByAgeAndSex();
+                //.enterAgeLowBorder("32")
+                //.enterAgeHighBorder("33")
+                //.clickOk()
+                .selectEmployee()
+                .clickByAgeAndSex();
 
-        //Assert.assertTrue("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationFieldIsEmpty("dasda"));
+        Assert.assertFalse("Doesn't sorted by age employee",AnyWorkerForm.checkTextFromFieldByInformationFieldIsEmpty(""));
 
     }
 
-    @Test(priority = 26)
+    @Test(priority = 16)
     public void SortedByStartWorkDateTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .clickByDateStartedWork()
                 .selectPeriodLastYear()
                 .selectTestEmployee()
                 .clickByCompanyField();
 
 
-        Assert.assertTrue("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationField("2021"));
+        Assert.assertTrue("Doesn't sorted by start of work",AnyWorkerForm.checkTextFromFieldByInformationField("2021"));
     }
 
-    @Test(priority = 27)
+    @Test(priority = 17)
     public void SortedByStartWorkDateWithAnotherParamTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .clickByDateStartedWork()
                 .selectPeriod()
                 .enterTodayDay()
@@ -373,11 +251,12 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationField(DateUtils.getTodayDate()));
     }
 
-    @Test(priority = 28)
+    @Test(priority = 18)
     public void SortedByHavingChildrenTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectChildrenYes()
                 .selectTestEmployee()
                 .clickByPersonalInfoTab();
@@ -385,36 +264,39 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by having children",AnyWorkerForm.checkHavingChildren());
     }
 
-    @Test(priority = 29)
+    @Test(priority = 19)
     public void SortedByNotHavingChildrenTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectChildrenNo()
                 .selectEmployee()
                 .clickByPersonalInfoTab();
 
-        Assert.assertFalse("Doesn't sorted by not a having children",AnyWorkerForm.checkHavingChildren());
+        Assert.assertTrue("Doesn't sorted by not a having children",AnyWorkerForm.checkHavingChildren());
     }
 
-    @Test(priority = 30)
+    @Test(priority = 20)
     public void SortedByDateOfBirthDayTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByDateOfBirthday()
                 .selectMonthOfDateOfBirthday()
-                .selectEmployee()
+                .selectTestEmployee()
                 .clickByAgeAndSex();
 
         Assert.assertTrue("Doesn't sorted by date of birthday ",AnyWorkerForm.checkTextFromFieldByInformationField("мар"));
     }
 
-    @Test(priority = 31)
+    @Test(priority = 21)
     public void SortedByAbsenceFromWorkTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByAbsenceFromWork()
                 .selectAbsence()
                 .selectEmployee()
@@ -424,11 +306,12 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by date of absence",AnyWorkerForm.requestIsDisplayed());
     }
 
-    @Test(priority = 32)
+    @Test(priority = 22)
     public void SortedByRoleInSystemTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByRoleInSystem()
                 .selectRole()
                 .selectTestEmployee()
@@ -437,11 +320,12 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by role",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.admin));
     }
 
-    @Test(priority = 33)
+    @Test(priority = 23)
     public void SortedByMaritalStatusTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByMaritalStatus()
                 .selectMaritalStatus()
                 .selectTestEmployee()
@@ -450,29 +334,31 @@ public class TestsHurma extends BaseTest{
         Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkMaritalStatus());
     }
 
-    @Test(priority = 34)
+    @Test(priority = 24)
     public void SortedByExperienceTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .selectByExperience()
                 .selectExperience()
                 .selectTestEmployee()
                 .clickByCompanyField();
 
-        Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkTextFromFieldByInformationField("2010"));
+        Assert.assertTrue("Doesn't sorted by experience",AnyWorkerForm.checkTextFromFieldByInformationField("2010"));
     }
 
-    @Test(priority = 35)
+    @Test(priority = 25)
     public void SortedByFormOfCooperationEmpTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .clickCheckBoxEmployeeFormOfWork()
                 .selectEmployee()
                 .clickByCompanyField();
 
-        Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.employee));
+        Assert.assertTrue("Doesn't sorted by form of cooperation",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.employee));
     }
 
     @Test(priority = 36)
@@ -480,11 +366,12 @@ public class TestsHurma extends BaseTest{
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .clickCheckBoxWithoutFormOfWork()
                 .selectTestEmployee()
                 .clickByCompanyField();
 
-        Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkTextFromFieldByInformationField("Внештатный"));
+        Assert.assertTrue("Doesn't sorted by form of cooperation",AnyWorkerForm.checkTextFromFieldByInformationField("Внештатный"));
     }
 
     @Test(priority = 37)
@@ -492,10 +379,50 @@ public class TestsHurma extends BaseTest{
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
+                .clickResetButton()
                 .clickCheckBoxFlptFormOfWork()
                 .selectEmployee()
                 .clickByCompanyField();
 
-        Assert.assertTrue("Doesn't sorted by marital status",AnyWorkerForm.checkTextFromFieldByInformationField("ФЛП"));
+        Assert.assertTrue("Doesn't sorted by FLP",AnyWorkerForm.checkTextFromFieldByInformationField("ФЛП"));
+    }
+
+    @Test(priority = 38)
+    public void SortedBySexTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .clickResetButton()
+                .clickCheckBoxWithoutSex()
+                .selectEmployee()
+                .clickByAgeAndSex();
+
+        Assert.assertTrue("Doesn't sorted by sex",AnyWorkerForm.checkTextFromFieldByInformationField("Не выбран"));
+    }
+
+    @Test(priority = 39)
+    public void SortedByMaleTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .clickResetButton()
+                .clickCheckBoxMaleSex()
+                .selectEmployee()
+                .clickByAgeAndSex();
+
+        Assert.assertTrue("Doesn't sorted by sex",AnyWorkerForm.checkTextFromFieldByInformationField("Мужской"));
+    }
+
+    @Test(priority = 40)
+    public void SortedByFemaleTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .clickToFilter()
+                .clickResetButton()
+                .clickCheckBoxFemaleSex()
+                .selectEmployee()
+                .clickByAgeAndSex();
+
+        Assert.assertTrue("Doesn't sorted by sex",AnyWorkerForm.checkTextFromFieldByInformationField("Женский"));
     }
 }

@@ -48,8 +48,17 @@ public class AnyWorkerForm {
     }
 
     public AnyWorkerForm clickEllipsis(){
-        $(By.xpath("//button[@data-mdja='01-06']")).click();
+        $(By.xpath("//button[@data-mdja='01-06']")).shouldBe(Condition.visible).click();
         return this;
+    }
+
+    public AnyWorkerForm clickSendAccess(){
+        $(By.xpath("//div[@class='v-list-item__title' and contains(text(),'Отправить доступ')]")).click();
+        return new AnyWorkerForm();
+    }
+
+    public void clickOk(){
+        $(By.xpath("//button//span[@class='v-btn__content' and contains(text(),'Отправить')]")).click();
     }
 
     public AnyWorkerForm clickRemove(){
@@ -91,7 +100,7 @@ public class AnyWorkerForm {
     }
 
     public static Boolean checkHavingChildren(){
-        return $$(By.xpath("//div[@class='v-expansion-panel-content']//li[@class='user-info__item']")).size()>=2;
+        return $$(By.xpath("//div[@class='v-expansion-panel-content']//li[@class='user-info__item']")).size()<=2;
     }
 
     public static Boolean requestIsDisplayed(){

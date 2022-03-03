@@ -10,8 +10,6 @@ import pages.workersForms.AnyWorkerForm;
 import pages.workersForms.CreateEmployeePage;
 import utils.RandomUtils;
 
-import java.util.Objects;
-
 import static com.codeborne.selenide.Selenide.*;
 
 public class EmployeesPage {
@@ -20,6 +18,7 @@ public class EmployeesPage {
     private final ElementsCollection listOfTestEmployees = $$(By.xpath("//a[contains(@class,'name') and contains(text(),'Тест')]"));
     private final ElementsCollection listOfFilterParams= $$(By.xpath("//div[@class='filter-title-block__activator']"));
     private final SelenideElement labelOfLoading = $(By.xpath("//div[@class='v-overlay__scrim']"));
+    private final ElementsCollection listOfCheckBoxes = $$(By.xpath("//input[@role='checkbox']"));
 
     private SelenideElement selectParamFromDropDownContainer(String name){
         return $(By.xpath(String.format("//div[@class='filter-options__item']//p[contains(text(),'%s')]",name)));
@@ -41,7 +40,7 @@ public class EmployeesPage {
     }
 
     public AnyWorkerForm selectTestEmployee(){
-        listOfTestEmployees.shouldBe(CollectionCondition.sizeGreaterThan(0)).get(RandomUtils.RandomInt(listOfTestEmployees.size()-1)).click();
+        listOfTestEmployees.shouldBe(CollectionCondition.sizeGreaterThan(0)).first().click();
         return new AnyWorkerForm();
     }
 
@@ -51,17 +50,20 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectProbation(){
-        $(By.id("input-193")).click();
+        $(By.xpath("//label[contains(text(),'Испытательный период')]")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage selectCooperation(){
-        $(By.xpath("//label[@for='input-198']")).click();
+        $(By.xpath("//label[contains(text(),'Сотрудничество')]")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage selectFinishOfCooperation(){
-        $(By.xpath("//label[@for='input-203']")).click();
+        $(By.xpath("//label[contains(text(),'Завершение сотрудничества')]")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
@@ -150,13 +152,13 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectTag(){
-       selectParamFromDropDownContainer(".NET Core").click();
+        selectParamFromDropDownContainer(".NET Core").click();
         labelOfLoading.shouldBe(Condition.visible);
-       return this;
+        return this;
     }
 
     public EmployeesPage selectByEvent(){
-        listOfFilterParams.first().click();
+        actions().moveToElement(listOfFilterParams.first()).click().perform();
         return this;
     }
 
@@ -193,7 +195,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectBySkills(){
-        listOfFilterParams.get(1).click();
+        actions().moveToElement(listOfFilterParams.get(1)).click().perform();
         return this;
     }
 
@@ -210,7 +212,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage clickCheckBoxExEmployee(){
-        $(By.id("input-46")).click();
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Бывшие сотрудники')]"))).click().perform();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
@@ -238,7 +240,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByLanguageSkills(){
-        listOfFilterParams.get(2).click();
+        actions().moveToElement(listOfFilterParams.get(2)).click().perform();
         return this;
     }
 
@@ -254,13 +256,13 @@ public class EmployeesPage {
     }
 
     public EmployeesPage clickCheckBoxWithoutAge(){
-        $(By.id("input-60")).click();
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Возраст не указан')]"))).click().perform();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage clickCheckBoxAge(){
-        $(By.xpath("//label[contains(text(),'Задать значение')]")).click();
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Задать значение')]"))).click().perform();
         return this;
     }
 
@@ -304,14 +306,41 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectChildrenYes(){
-        $(By.xpath("//label[contains(text(),'Есть дети')]")).click();
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Есть дети')]"))).click().perform();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage selectChildrenNo(){
-        $(By.xpath("//label[contains(text(),'Нет детей')]")).click();
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Нет детей')]"))).click().perform();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
+
+    public EmployeesPage clickResetButton(){
+        listOfCheckBoxes.get(RandomUtils.RandomInt(listOfCheckBoxes.size()-1)).click();
+        labelOfLoading.shouldBe(Condition.visible);
+        $(By.xpath("//div//span[@class='filter-block__reset-btn']")).click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage clickCheckBoxWithoutSex(){
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Не выбран')]"))).click().perform();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage clickCheckBoxMaleSex(){
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Мужской')]"))).click().perform();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    public EmployeesPage clickCheckBoxFemaleSex(){
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Женский')]"))).click().perform();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
 }

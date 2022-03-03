@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
 public class CandidatePage {
+
     public CandidatePage clickToTheThreeDots(){
         switchTo().window(1);
         $(By.xpath("//div[@class='blue-hover']")).hover();
