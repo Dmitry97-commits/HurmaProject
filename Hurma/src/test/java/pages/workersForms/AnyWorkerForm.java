@@ -44,7 +44,7 @@ public class AnyWorkerForm {
     }
 
     public static Boolean checkTextFromFieldByInformationFieldIsEmpty(String expectedValue){
-        return $(By.xpath(String.format("//li[@class='user-info__item']//span[contains(text(),'%s')]",expectedValue))).shouldBe(Condition.not(Condition.visible)).isDisplayed();
+        return $(By.xpath(String.format("//li[@class='user-info__item']//span[contains(text(),'%s')]",expectedValue))).shouldNotBe(Condition.visible).isDisplayed();
     }
 
     public AnyWorkerForm clickEllipsis(){
@@ -104,7 +104,7 @@ public class AnyWorkerForm {
     }
 
     public static Boolean requestIsDisplayed(){
-        return $(By.xpath("//tr//span[contains(text(),'Ночная смена')]")).shouldBe(Condition.visible).isDisplayed();
+        return $(By.xpath("//tr//span[contains(text(),'Отпуск')]")).shouldBe(Condition.visible).isDisplayed();
     }
 
     public static Boolean checkMaritalStatus(){

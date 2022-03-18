@@ -4,6 +4,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.workersForms.AnyWorkerForm;
@@ -31,6 +32,7 @@ public class EmployeesPage {
 
     public EmployeesPage selectPage(int numOfPage){
         $(By.xpath(String.format("//nav[@role='navigation']//li[%s]//button",numOfPage))).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
@@ -73,7 +75,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByDateOfBirthday(){
-        listOfFilterParams.get(3).click();
+        listOfFilterParams.first().scrollIntoView(false).click();
         return this;
     }
 
@@ -84,18 +86,19 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByAbsenceFromWork(){
-        listOfFilterParams.get(4).click();
+        listOfFilterParams.get(1).scrollIntoView(false).click();
         return this;
     }
 
     public EmployeesPage selectAbsence(){
-        selectParamFromDropDownContainer("Ночная смена").click();
-        listOfEmployees.shouldBe(CollectionCondition.size(1));
+        selectParamFromDropDownContainer("Отпуск").click();
+        labelOfLoading.shouldBe(Condition.visible);
+        listOfEmployees.shouldBe(CollectionCondition.sizeGreaterThan(0));
         return this;
     }
 
     public EmployeesPage selectByRoleInSystem(){
-        listOfFilterParams.get(5).click();
+        listOfFilterParams.get(2).scrollIntoView(false).click();
         return this;
     }
 
@@ -106,7 +109,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByMaritalStatus(){
-        listOfFilterParams.get(7).click();
+        listOfFilterParams.get(4).scrollIntoView(false).click();
         return this;
     }
 
@@ -117,7 +120,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByExperience(){
-        listOfFilterParams.get(8).click();
+        listOfFilterParams.get(5).scrollIntoView(false).click();
         return this;
     }
 
@@ -136,7 +139,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByPlace(){
-        listOfFilterParams.get(9).click();
+        listOfFilterParams.get(6).scrollIntoView(false).click();
         return this;
     }
 
@@ -147,7 +150,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByTag(){
-        listOfFilterParams.get(12).click();
+        listOfFilterParams.get(9).scrollIntoView(false).click();
         return this;
     }
 
@@ -158,12 +161,12 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByEvent(){
-        actions().moveToElement(listOfFilterParams.first()).click().perform();
+        listOfFilterParams.get(13).scrollIntoView(false).click();
         return this;
     }
 
     public EmployeesPage selectEvent(){
-        selectParamFromDropDownContainer("1:1").click();
+        selectParamFromDropDownContainer("Performance review").click();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
@@ -173,7 +176,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByLevel(){
-        listOfFilterParams.get(11).click();
+        listOfFilterParams.get(8).scrollIntoView(false).click();
         return this;
     }
 
@@ -184,7 +187,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByResponsible(){
-        listOfFilterParams.last().click();
+        listOfFilterParams.get(10).scrollIntoView(false).click();
         return this;
     }
 
@@ -195,7 +198,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectBySkills(){
-        actions().moveToElement(listOfFilterParams.get(1)).click().perform();
+        listOfFilterParams.get(12).scrollIntoView(false).click();
         return this;
     }
 
@@ -206,31 +209,31 @@ public class EmployeesPage {
     }
 
     public EmployeesPage clickCheckBoxEmployee(){
-        $(By.id("input-41")).click();
+        $$(By.xpath("//label[contains(text(),'Сотрудники')]")).last().scrollIntoView(false).click();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage clickCheckBoxExEmployee(){
-        actions().moveToElement($(By.xpath("//label[contains(text(),'Бывшие сотрудники')]"))).click().perform();
+        $(By.xpath("//label[contains(text(),'Бывшие сотрудники')]")).scrollIntoView(false).click();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage clickCheckBoxEmployeeFormOfWork(){
-        $(By.id("input-127")).click();
+        $(By.xpath("//label[contains(text(),'Сотрудник')]")).click();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
     public EmployeesPage clickCheckBoxWithoutFormOfWork(){
-        $(By.id("input-122")).click();
+        $(By.xpath("//label[contains(text(),'Внештатный')]")).scrollIntoView(false).click();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
-    public EmployeesPage clickCheckBoxFlptFormOfWork(){
-        $(By.id("input-132")).click();
+    public EmployeesPage clickCheckBoxFlpFormOfWork(){
+        $(By.xpath("//label[contains(text(),'ФЛП')]")).scrollIntoView(false).click();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
@@ -240,7 +243,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByLanguageSkills(){
-        actions().moveToElement(listOfFilterParams.get(2)).click().perform();
+        actions().moveToElement(listOfFilterParams.get(11)).click().perform();
         return this;
     }
 

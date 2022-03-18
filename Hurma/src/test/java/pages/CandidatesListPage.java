@@ -1,6 +1,8 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import pages.workersForms.CandidatePage;
 import utils.RandomUtils;
@@ -11,6 +13,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class CandidatesListPage {
 
     private final ElementsCollection listOfTestEmployee = $$(By.xpath("//a[contains(@class,'name') and contains(text(),'Тест')]"));
+    private final SelenideElement labelOfLoading = $(By.xpath("//div[@class='v-overlay__scrim']"));
 
     public CandidatesListPage clickToFilter(){
         $(By.xpath("//ul[@class='sorting-btn']//li")).hover().click();
@@ -28,7 +31,12 @@ public class CandidatesListPage {
     }
 
     public CandidatePage selectCandidate(){
-        listOfTestEmployee.get(RandomUtils.RandomInt(listOfTestEmployee.size()-1)).click();
+        listOfTestEmployee.last().shouldBe(Condition.visible).click();
         return new CandidatePage();
+    }
+
+    public CandidatesListPage selectPage(){
+        $(By.xpath("//ul[@role='navigation']//li//a")).click();
+        return this;
     }
 }

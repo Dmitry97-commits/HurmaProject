@@ -1,16 +1,19 @@
 package tests;
 
+import com.codeborne.selenide.Selenide;
 import org.junit.Assert;
 import org.testng.annotations.Test;
 import pages.EmployeesPage;
 import pages.MainPage;
 import pages.workersForms.AnyWorkerForm;
+import pages.workersForms.CandidatePage;
 import resources.TestData;
 import utils.RandomUtils;
 
-public class CreateEmployeeTests extends BaseTest {
+public class CreatingAndRemovingTests extends BaseTest {
 
     public MainPage mainPage = new MainPage();
+    public CandidatePage candidatePage = new CandidatePage();
     String randomStr = RandomUtils.RandomString(10);
 
     @Test(priority = 1)
@@ -113,5 +116,36 @@ public class CreateEmployeeTests extends BaseTest {
                 .clickByCompanyField();
 
         Assert.assertTrue("Admin doesn't created",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.admin));
+    }
+
+    @Test(priority = 7)
+    public void RemovingTest(){
+        mainPage
+                .clickToTheCompanyTab()
+                .selectPage(9)
+                .selectTestEmployee()
+                .clickEllipsis()
+                .clickRemove()
+                .removeEmployee();
+
+        //Кандидат появляется на след день
+    }
+
+    @Test(priority = 8)
+    public void DeletingFromRemovedTest(){
+        mainPage
+                .clickToTheCandidatesTab()
+                .clickToFilter()
+                .clickSortedBy()
+                .selectOnlyExEmployee()
+                .selectPage()
+                .selectCandidate();
+        Selenide.switchTo().window(1);
+                candidatePage.clickToTheThreeDots()
+                .deletedFromRemoved()
+                .asseptDeleting();
+
+        Assert.assertTrue("Candidate wasnt deleted", CandidatePage.isCandidateRemoved());
+
     }
 }

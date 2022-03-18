@@ -103,7 +103,7 @@ public class SortingTests extends BaseTest{
                 .selectByEvent()
                 .selectEvent();
 
-        Assert.assertTrue("Doesn't sorted by event", EmployeesPage.checkEvent("1:1"));
+        Assert.assertTrue("Doesn't sorted by event", EmployeesPage.checkEvent("Performance review"));
     }
 
     @Test(priority = 8)
@@ -196,10 +196,10 @@ public class SortingTests extends BaseTest{
                 .clickToFilter()
                 .clickResetButton()
                 .clickCheckBoxWithoutAge()
-                .selectTestEmployee()
+                .selectEmployee()
                 .clickByAgeAndSex();
 
-        Assert.assertFalse("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationField("Test"));
+        Assert.assertFalse("Doesn't sorted by ex employee",AnyWorkerForm.checkTextFromFieldByInformationFieldIsEmpty("Возраст"));
 
     }
 
@@ -302,7 +302,6 @@ public class SortingTests extends BaseTest{
                 .selectEmployee()
                 .clickByRequestTab();
 
-
         Assert.assertTrue("Doesn't sorted by date of absence",AnyWorkerForm.requestIsDisplayed());
     }
 
@@ -314,7 +313,7 @@ public class SortingTests extends BaseTest{
                 .clickResetButton()
                 .selectByRoleInSystem()
                 .selectRole()
-                .selectTestEmployee()
+                .selectEmployee()
                 .clickByCompanyField();
 
         Assert.assertTrue("Doesn't sorted by role",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.admin));
@@ -361,7 +360,7 @@ public class SortingTests extends BaseTest{
         Assert.assertTrue("Doesn't sorted by form of cooperation",AnyWorkerForm.checkTextFromFieldByInformationField(TestData.employee));
     }
 
-    @Test(priority = 36)
+    @Test(priority = 26)
     public void SortedByFormOfCooperationWithoutTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -374,20 +373,20 @@ public class SortingTests extends BaseTest{
         Assert.assertTrue("Doesn't sorted by form of cooperation",AnyWorkerForm.checkTextFromFieldByInformationField("Внештатный"));
     }
 
-    @Test(priority = 37)
+    @Test(priority = 27)
     public void SortedByFormOfCooperationFlpTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
                 .clickResetButton()
-                .clickCheckBoxFlptFormOfWork()
+                .clickCheckBoxFlpFormOfWork()
                 .selectEmployee()
                 .clickByCompanyField();
 
         Assert.assertTrue("Doesn't sorted by FLP",AnyWorkerForm.checkTextFromFieldByInformationField("ФЛП"));
     }
 
-    @Test(priority = 38)
+    @Test(priority = 28)
     public void SortedBySexTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -400,7 +399,7 @@ public class SortingTests extends BaseTest{
         Assert.assertTrue("Doesn't sorted by sex",AnyWorkerForm.checkTextFromFieldByInformationField("Не выбран"));
     }
 
-    @Test(priority = 39)
+    @Test(priority = 29)
     public void SortedByMaleTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -413,7 +412,7 @@ public class SortingTests extends BaseTest{
         Assert.assertTrue("Doesn't sorted by sex",AnyWorkerForm.checkTextFromFieldByInformationField("Мужской"));
     }
 
-    @Test(priority = 40)
+    @Test(priority = 30)
     public void SortedByFemaleTest(){
         mainPage
                 .clickToTheCompanyTab()

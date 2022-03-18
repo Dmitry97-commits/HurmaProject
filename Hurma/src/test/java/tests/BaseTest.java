@@ -13,8 +13,9 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() throws Exception {
+        //Configuration.browser = "firefox";
         Selenide.open(ResourcesUtils.getResources("configs","mainUrl"));
-        //Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = true;
         Configuration.timeout = Long.parseLong(ResourcesUtils.getResources("configs","timeout"));
         loginPage
                 .enterEmail(ResourcesUtils.getResources("configs","email"))

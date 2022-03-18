@@ -1,4 +1,4 @@
-package gmail.jsonObjects.authPages;
+package gmail.authPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
