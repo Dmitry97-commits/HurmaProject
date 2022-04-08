@@ -54,6 +54,7 @@ public class EmployeesPage {
     public EmployeesPage selectProbation(){
         $(By.xpath("//label[contains(text(),'Испытательный период')]")).click();
         labelOfLoading.shouldBe(Condition.visible);
+        $(By.xpath("//div//span[@class='filter-block__reset-btn']")).shouldBe(Condition.visible);
         return this;
     }
 
@@ -70,7 +71,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByTeam(){
-        listOfFilterParams.get(10).click();
+        listOfFilterParams.get(12).click();
         return this;
     }
 
@@ -150,7 +151,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByTag(){
-        listOfFilterParams.get(9).scrollIntoView(false).click();
+        listOfFilterParams.get(13).scrollIntoView(false).click();
         return this;
     }
 
@@ -161,7 +162,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByEvent(){
-        listOfFilterParams.get(13).scrollIntoView(false).click();
+        listOfFilterParams.get(9).scrollIntoView(false).click();
         return this;
     }
 
@@ -176,7 +177,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByLevel(){
-        listOfFilterParams.get(8).scrollIntoView(false).click();
+        listOfFilterParams.get(7).scrollIntoView(false).click();
         return this;
     }
 
@@ -187,7 +188,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByResponsible(){
-        listOfFilterParams.get(10).scrollIntoView(false).click();
+        listOfFilterParams.get(11).scrollIntoView(false).click();
         return this;
     }
 
@@ -198,7 +199,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectBySkills(){
-        listOfFilterParams.get(12).scrollIntoView(false).click();
+        listOfFilterParams.get(8).scrollIntoView(false).click();
         return this;
     }
 
@@ -243,7 +244,7 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectByLanguageSkills(){
-        actions().moveToElement(listOfFilterParams.get(11)).click().perform();
+        actions().moveToElement(listOfFilterParams.get(10)).click().perform();
         return this;
     }
 

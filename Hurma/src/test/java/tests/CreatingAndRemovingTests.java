@@ -3,7 +3,6 @@ package tests;
 import com.codeborne.selenide.Selenide;
 import org.junit.Assert;
 import org.testng.annotations.Test;
-import pages.EmployeesPage;
 import pages.MainPage;
 import pages.workersForms.AnyWorkerForm;
 import pages.workersForms.CandidatePage;

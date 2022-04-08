@@ -5,11 +5,10 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import pages.workersForms.CandidatePage;
-import utils.RandomUtils;
+
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-
 public class CandidatesListPage {
 
     private final ElementsCollection listOfTestEmployee = $$(By.xpath("//a[contains(@class,'name') and contains(text(),'Тест')]"));
