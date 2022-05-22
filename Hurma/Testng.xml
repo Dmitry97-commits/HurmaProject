@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite thread-count="1" verbose="1" name="Hurma" annotations="JDK" parallel="tests">
+
+    <test name="createdAndRemove">
+        <classes>
+            <class name="tests.CreatingAndRemovingTests"/>
+        </classes>
+    </test>
+
+    <test name="sorting">
+        <classes>
+            <class name="tests.SortingTests"/>
+        </classes>
+    </test>
+
+    <test name="login">
+        <classes>
+            <class name="tests.LoginTests"/>
+        </classes>
+    </test>
+</suite>
