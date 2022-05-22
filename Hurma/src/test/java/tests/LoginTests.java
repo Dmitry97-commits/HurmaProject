@@ -27,7 +27,7 @@ public class LoginTests {
     @Test
     public void LoginTest() throws Exception {
 
-        String email = String.format("testhurma10+%s@gmail.com",RandomUtils.RandomInt(100));
+        String email = String.format("testhurmageaorgia+%s@gmail.com",RandomUtils.RandomInt(100));
         String name = String.format("Test Email %s+%s", RandomUtils.RandomInt(10),RandomUtils.RandomString(1));
 
         System.out.println(email);
@@ -59,7 +59,7 @@ public class LoginTests {
 
         List<String> message= waitForMail(ResourcesUtils.getResources("configs","emailLoginTest"), ResourcesUtils.getResources("configs","passwordForLoginTest"), name, Integer.parseInt(ResourcesUtils.getResources("configs","timeForWaitingMail")));
 
-        Assert.assertTrue("",message.size()>0);
+        Assert.assertTrue("Message not found",message.size()>0);
 
         String text = Jsoup.parse(message.get(0)).text();
         var password = ParseUtils.getCredFromText(text, "Пароль:").get(1);

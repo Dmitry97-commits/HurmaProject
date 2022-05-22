@@ -9,33 +9,40 @@ import pages.workersForms.CandidatePage;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static io.qameta.allure.Allure.step;
+
 public class CandidatesListPage {
 
     private final ElementsCollection listOfTestEmployee = $$(By.xpath("//a[contains(@class,'name') and contains(text(),'Тест')]"));
     private final SelenideElement labelOfLoading = $(By.xpath("//div[@class='v-overlay__scrim']"));
 
     public CandidatesListPage clickToFilter(){
-        $(By.xpath("//ul[@class='sorting-btn']//li")).hover().click();
+        step("Click To The Filter ",()->
+        $(By.xpath("//ul[@class='sorting-btn']//li")).hover().click());
         return this;
     }
 
     public CandidatesListPage clickSortedBy(){
-        $(By.id("ex_employees_select_plaseholder")).click();
+        step("Click To Sorting By",()->
+        $(By.id("ex_employees_select_plaseholder")).click());
         return this;
     }
 
     public CandidatesListPage selectOnlyExEmployee(){
-        $(By.xpath("//p[contains(@data-value,'only')]")).click();
+        step("Select Only Ex Employee ",()->
+        $(By.xpath("//p[contains(@data-value,'only')]")).click());
         return this;
     }
 
     public CandidatePage selectCandidate(){
-        listOfTestEmployee.last().shouldBe(Condition.visible).click();
+        step("Select Candidate",()->
+        listOfTestEmployee.last().shouldBe(Condition.visible).click());
         return new CandidatePage();
     }
 
     public CandidatesListPage selectPage(){
-        $(By.xpath("//ul[@role='navigation']//li//a")).click();
+        step("Select Page",()->
+        $(By.xpath("//ul[@role='navigation']//li//a")).click());
         return this;
     }
 }

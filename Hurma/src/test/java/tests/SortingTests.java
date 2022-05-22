@@ -1,7 +1,7 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.testng.annotations.Test;
 import pages.EmployeesPage;
 import pages.MainPage;
@@ -15,6 +15,7 @@ public class SortingTests extends BaseTest{
     EmployeesPage employeesPage = new EmployeesPage();
 
     @Test(priority = 1)
+    @Description("Probation Sorting Test")
     public void SortedByProbationTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -28,6 +29,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 2)
+    @Description("Cooperation Sorting Test")
     public void SortedByCooperationTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -42,6 +44,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 3)
+    @Description("Finish Cooperation Sorting Test")
     public void SortedByFinishCooperationTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -54,6 +57,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 4)
+    @Description("Team Sorting Test")
     public void SortedByTeamTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -68,6 +72,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 5)
+    @Description("Place Sorting Test")
     public void SortedByPlaceTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -82,6 +87,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 6)
+    @Description("Tag Sorting Test")
     public void SortedByTagTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -95,11 +101,25 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 7)
+    @Description("Event Sorting Test")
     public void SortedByEventTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
                 .clickResetButton()
+                .selectPage(10)
+                .selectTestEmployee()
+                .clickByPlus()
+                .clickByPatterns()
+                .selectPerfReview()
+                .selectTypePerfReview()
+                .clickByTypeOfPerfReview()
+                .clickSave()
+                .clickByComment()
+                .clickBySend()
+                .closeForm()
+                .outOfForm();
+        employeesPage
                 .selectByEvent()
                 .selectEvent();
 
@@ -107,6 +127,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 8)
+    @Description("Level Sorting Test")
     public void SortedByLevelTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -121,6 +142,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 9)
+    @Description("Responsible Sorting Test")
     public void SortedByResponsibleTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -135,6 +157,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 10)
+    @Description("Skill Sorting Test")
     public void SortedBySkillsTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -149,7 +172,8 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 11)
-    public void SortedByExEmployessTest(){
+    @Description("Ex Employees Sorting Test")
+    public void SortedByExEmployeesTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
@@ -162,6 +186,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 12)
+    @Description("Probation Sorting Test")
     public void SortedExByExEmployeesTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -174,6 +199,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 13)
+    @Description("Language Sorting Test")
     public void SortedLanguageSkillsTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -190,6 +216,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 14)
+    @Description("Without Age Sorting Test")
     public void SortedByWithoutAgeTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -203,25 +230,24 @@ public class SortingTests extends BaseTest{
 
     }
 
-    @Ignore
+
     @Test(priority = 15)
+    @Description("Age Sorting Test")
     public void SortedByWithAgeTest(){
         mainPage
                 .clickToTheCompanyTab()
                 .clickToFilter()
                 .clickResetButton()
                 .clickCheckBoxAge()
-                //.enterAgeLowBorder("32")
-                //.enterAgeHighBorder("33")
-                //.clickOk()
                 .selectEmployee()
                 .clickByAgeAndSex();
 
-        Assert.assertFalse("Doesn't sorted by age employee",AnyWorkerForm.checkTextFromFieldByInformationFieldIsEmpty(""));
+        Assert.assertTrue("Doesn't sorted by age employee",AnyWorkerForm.checkOfAge());
 
     }
 
     @Test(priority = 16)
+    @Description("Start Work Date Sorting Test")
     public void SortedByStartWorkDateTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -237,6 +263,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 17)
+    @Description("Start Work Date(another param) Sorting Test")
     public void SortedByStartWorkDateWithAnotherParamTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -252,6 +279,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 18)
+    @Description("Children Sorting Test")
     public void SortedByHavingChildrenTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -265,6 +293,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 19)
+    @Description("Without Children Sorting Test")
     public void SortedByNotHavingChildrenTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -278,6 +307,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 20)
+    @Description("Date Of Birthday Sorting Test")
     public void SortedByDateOfBirthDayTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -292,6 +322,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 21)
+    @Description("Absence From Work Sorting Test")
     public void SortedByAbsenceFromWorkTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -306,6 +337,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 22)
+    @Description("Probation Sorting Test")
     public void SortedByRoleInSystemTest(){
         mainPage
                 .clickToTheCompanyTab()
