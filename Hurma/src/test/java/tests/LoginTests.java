@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Description;
 import org.jsoup.Jsoup;
 import org.junit.Assert;
 import org.openqa.selenium.safari.SafariOptions;
@@ -25,6 +26,7 @@ public class LoginTests {
     String randomStr = RandomUtils.RandomString(10);
 
     @Test
+    @Description("Login Test")
     public void LoginTest() throws Exception {
 
         String email = String.format("testhurmageaorgia+%s@gmail.com",RandomUtils.RandomInt(100));

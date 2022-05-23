@@ -84,13 +84,13 @@ public class AnyWorkerForm {
 
     public AnyWorkerForm clickRemove(){
         step("Click To Remove",()->
-        $(By.id("list-item-182")).click());
+        $(By.xpath("//div[contains(@class,'v-list-item__title') and contains(text(),'Уволить')]")).click());
         return this;
     }
 
     public AnyWorkerForm removeEmployee(){
         step("Click To 'Уволить' Field",()-> {
-            $(By.id("input-191")).click();
+            $(By.xpath("//div[@class='v-text-field__slot']//input")).click();
             var enabledDates = $$(By.xpath("//button[@class='v-btn v-btn--text v-btn--rounded theme--light']"));
             enabledDates.get(enabledDates.size() - 1).click();
             $(By.xpath("//div[@class='content-select']")).click();

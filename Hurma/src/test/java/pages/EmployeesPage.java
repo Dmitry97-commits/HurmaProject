@@ -55,7 +55,7 @@ public class EmployeesPage {
 
     public EmployeesPage selectProbation(){
         step("Select Probation",()->{
-        $(By.xpath("//label[contains(text(),'Испытательный период')]")).click();
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Испытательный период')]"))).click();
         labelOfLoading.shouldBe(Condition.visible);
         $(By.xpath("//div//span[@class='filter-block__reset-btn']")).shouldBe(Condition.visible);
         });
@@ -63,8 +63,9 @@ public class EmployeesPage {
     }
 
     public EmployeesPage selectCooperation(){
-        step("Select Cooperation",()->{$(By.xpath("//label[contains(text(),'Сотрудничество')]")).click();
-        labelOfLoading.shouldBe(Condition.visible);
+        step("Select Cooperation",()->{
+            actions().moveToElement($(By.xpath("//label[contains(text(),'Сотрудничество')]"))).click();
+            labelOfLoading.shouldBe(Condition.visible);
         });
         return this;
     }
@@ -334,7 +335,7 @@ public class EmployeesPage {
 
     public EmployeesPage clickByDateStartedWork(){
         step("Click To 'Выберите дату или период' ",()-> {
-            $(By.xpath("//p[contains(text(),'Выберите дату или период')]")).click();
+            actions().moveToElement($(By.xpath("//p[contains(text(),'Выберите дату или период')]"))).click();
         });
         return this;
     }

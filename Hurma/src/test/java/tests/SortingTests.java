@@ -352,6 +352,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 23)
+    @Description("Marital Status Sorting")
     public void SortedByMaritalStatusTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -366,6 +367,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 24)
+    @Description("Experience Sorting Test")
     public void SortedByExperienceTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -380,6 +382,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 25)
+    @Description("Form Of Cooperation (Employee) Test")
     public void SortedByFormOfCooperationEmpTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -393,6 +396,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 26)
+    @Description("Form Of Cooperation (Without) Test")
     public void SortedByFormOfCooperationWithoutTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -406,6 +410,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 27)
+    @Description("Form Of Cooperation (Flp) Test")
     public void SortedByFormOfCooperationFlpTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -419,6 +424,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 28)
+    @Description("Sex Sorted (Without) Test")
     public void SortedBySexTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -432,6 +438,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 29)
+    @Description("Sex Sorted (Male) Test")
     public void SortedByMaleTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -445,6 +452,7 @@ public class SortingTests extends BaseTest{
     }
 
     @Test(priority = 30)
+    @Description("Sex Sorted (Female) Test")
     public void SortedByFemaleTest(){
         mainPage
                 .clickToTheCompanyTab()

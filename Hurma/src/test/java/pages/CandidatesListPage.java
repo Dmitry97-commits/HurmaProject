@@ -36,7 +36,7 @@ public class CandidatesListPage {
 
     public CandidatePage selectCandidate(){
         step("Select Candidate",()->
-        listOfTestEmployee.last().shouldBe(Condition.visible).click());
+        $$(By.xpath("//a[contains(@class,'name')]")).last().shouldBe(Condition.visible).click());
         return new CandidatePage();
     }
 

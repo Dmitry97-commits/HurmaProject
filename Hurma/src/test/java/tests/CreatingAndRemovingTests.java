@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -16,6 +17,7 @@ public class CreatingAndRemovingTests extends BaseTest {
     String randomStr = RandomUtils.RandomString(10);
 
     @Test(priority = 1)
+    @Description("Created Employee Test")
     public void CreatedEmployeeTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -33,6 +35,7 @@ public class CreatingAndRemovingTests extends BaseTest {
     }
 
     @Test(priority = 2)
+    @Description("Created Recruiter Test")
     public void CreatedRecruiterTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -50,6 +53,7 @@ public class CreatingAndRemovingTests extends BaseTest {
     }
 
     @Test(priority = 3)
+    @Description("Created Manager Of Team Test")
     public void CreatedManagerOfTeamTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -67,6 +71,7 @@ public class CreatingAndRemovingTests extends BaseTest {
     }
 
     @Test(priority = 4)
+    @Description("Created Manager Of Company Test")
     public void CreatedManagerOfCompanyTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -84,6 +89,7 @@ public class CreatingAndRemovingTests extends BaseTest {
     }
 
     @Test(priority = 5)
+    @Description("Created HR Test")
     public void CreatedHRTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -101,6 +107,7 @@ public class CreatingAndRemovingTests extends BaseTest {
     }
 
     @Test(priority = 6)
+    @Description("Created Admin Test")
     public void CreatedAdminTest(){
         mainPage
                 .clickToTheCompanyTab()
@@ -118,9 +125,12 @@ public class CreatingAndRemovingTests extends BaseTest {
     }
 
     @Test(priority = 7)
+    @Description("Removing Test")
     public void RemovingTest(){
         mainPage
                 .clickToTheCompanyTab()
+                .clickToFilter()
+                .clickResetButton()
                 .selectPage(9)
                 .selectTestEmployee()
                 .clickEllipsis()
@@ -131,6 +141,7 @@ public class CreatingAndRemovingTests extends BaseTest {
     }
 
     @Test(priority = 8)
+    @Description("Deleting From Removed Test")
     public void DeletingFromRemovedTest(){
         mainPage
                 .clickToTheCandidatesTab()
