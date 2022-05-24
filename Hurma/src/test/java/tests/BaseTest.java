@@ -16,7 +16,7 @@ public class BaseTest {
     public void setUp() throws Exception {
         Selenide.open(ResourcesUtils.getResources("configs","mainUrl"));
         Configuration.timeout = Long.parseLong(ResourcesUtils.getResources("configs","timeout"));
-        Configuration.holdBrowserOpen = true;
+        //Configuration.holdBrowserOpen = true;
         loginPage
                 .enterEmail(ResourcesUtils.getResources("configs","email"))
                 .enterPassword(ResourcesUtils.getResources("configs","password"))
