@@ -1,8 +1,11 @@
 package tests;
-
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.testng.ScreenShooter;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
+import listener.ListenerAllure;
 import org.junit.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.workersForms.AnyWorkerForm;
@@ -10,8 +13,8 @@ import pages.workersForms.CandidatePage;
 import resources.TestData;
 import utils.RandomUtils;
 
+@Listeners({ListenerAllure.class})
 public class CreatingAndRemovingTests extends BaseTest {
-
     public MainPage mainPage = new MainPage();
     public CandidatePage candidatePage = new CandidatePage();
     String randomStr = RandomUtils.RandomString(10);
@@ -152,8 +155,8 @@ public class CreatingAndRemovingTests extends BaseTest {
                 .selectCandidate();
         Selenide.switchTo().window(1);
                 candidatePage.clickToTheThreeDots()
-                .deletedFromRemoved()
-                .asseptDeleting();
+                .deletedFromRemoved();
+                //.asseptDeleting();
 
         Assert.assertTrue("Candidate wasnt deleted", CandidatePage.isCandidateRemoved());
 

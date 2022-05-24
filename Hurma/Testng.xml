@@ -2,18 +2,22 @@
 
 <suite thread-count="1" verbose="1" name="Hurma" annotations="JDK" parallel="tests">
 
+    <listeners>
+        <listener class-name="listener.ListenerAllure"/>
+    </listeners>
+
     <test name="createdAndRemove">
         <classes>
             <class name="tests.CreatingAndRemovingTests"/>
         </classes>
     </test>
-
+    
     <test name="sorting">
         <classes>
             <class name="tests.SortingTests"/>
         </classes>
     </test>
-
+    
     <test name="login">
         <classes>
             <class name="tests.LoginTests"/>

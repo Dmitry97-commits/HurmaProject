@@ -1,7 +1,17 @@
 package tests;
 
+import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Allure;
+import io.qameta.allure.AllureId;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
+import listener.ListenerAllure;
 import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.rules.TestWatcher;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.EmployeesPage;
 import pages.MainPage;
@@ -9,6 +19,7 @@ import pages.workersForms.AnyWorkerForm;
 import resources.TestData;
 import utils.DateUtils;
 
+@Listeners({ListenerAllure.class})
 public class SortingTests extends BaseTest{
 
     public MainPage mainPage = new MainPage();

@@ -2,10 +2,12 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
+import listener.ListenerAllure;
 import org.jsoup.Jsoup;
 import org.junit.Assert;
-import org.openqa.selenium.safari.SafariOptions;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.MainPage;
@@ -13,18 +15,18 @@ import resources.TestData;
 import utils.ParseUtils;
 import utils.RandomUtils;
 import utils.ResourcesUtils;
-
-import java.util.Arrays;
 import java.util.List;
 
 import static utils.EmailUtils.waitForMail;
 
+@Listeners({ListenerAllure.class})
 public class LoginTests {
 
     LoginPage loginPage = new LoginPage();
     MainPage mainPage = new MainPage();
     String randomStr = RandomUtils.RandomString(10);
 
+    @AllureId("39")
     @Test
     @Description("Login Test")
     public void LoginTest() throws Exception {

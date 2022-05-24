@@ -4,15 +4,13 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.checkerframework.checker.units.qual.C;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.workersForms.AnyWorkerForm;
 import pages.workersForms.CreateEmployeePage;
 import utils.RandomUtils;
-
 import static com.codeborne.selenide.Selenide.*;
-import static io.qameta.allure.Allure.step;
 
 public class EmployeesPage {
 
@@ -22,134 +20,138 @@ public class EmployeesPage {
     private final SelenideElement labelOfLoading = $(By.xpath("//div[@class='v-overlay__scrim']"));
     private final ElementsCollection listOfCheckBoxes = $$(By.xpath("//input[@role='checkbox']"));
 
+    @Step("Select Param From Dropdown Container")
     private SelenideElement selectParamFromDropDownContainer(String name){
-        step("Select Params From Dropdown Container");
             return $(By.xpath(String.format("//div[@class='filter-options__item']//p[contains(text(),'%s')]", name)));
     }
 
+    @Step("Click Create Button")
     public CreateEmployeePage clickCreateButton(){
-        step("Click Create Button",()-> $(By.xpath("//a[contains(@href,'create')]")).click());
+        $(By.xpath("//a[contains(@href,'create')]")).click();
         return new CreateEmployeePage();
     }
 
+    @Step("Select Page")
     public EmployeesPage selectPage(int numOfPage){
-        step("Select Page",()->$(By.xpath(String.format("//nav[@role='navigation']//li[%s]//button",numOfPage))).click());
+       $(By.xpath(String.format("//nav[@role='navigation']//li[%s]//button",numOfPage))).click();
         labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select Employee")
     public AnyWorkerForm selectEmployee(){
-        step("Select Employee",()->listOfEmployees.shouldBe(CollectionCondition.sizeGreaterThan(0)).get(RandomUtils.RandomInt(listOfEmployees.size()-1)).click());
+        listOfEmployees.shouldBe(CollectionCondition.sizeGreaterThan(0)).get(RandomUtils.RandomInt(listOfEmployees.size()-1)).click();
         return new AnyWorkerForm();
     }
 
+    @Step("Select Test Employee")
     public AnyWorkerForm selectTestEmployee(){
-        step("Select Test Employee",()->listOfTestEmployees.shouldBe(CollectionCondition.sizeGreaterThan(0)).first().click());
+        listOfTestEmployees.shouldBe(CollectionCondition.sizeGreaterThan(0)).first().click();
         return new AnyWorkerForm();
     }
 
+    @Step("Click To The Filter")
     public EmployeesPage clickToFilter(){
-        step("Click To The Filter",()->$(By.xpath("//ul[@class='sorting-btn-list']//li")).hover().click());
+        $(By.xpath("//ul[@class='sorting-btn-list']//li")).hover().click();
         return this;
     }
 
+    @Step("Select Probation")
     public EmployeesPage selectProbation(){
-        step("Select Probation",()->{
-        actions().moveToElement($(By.xpath("//label[contains(text(),'Испытательный период')]"))).click();
+        $(By.xpath("//label[contains(text(),'Испытательный период')]")).scrollIntoView(false).click();
         labelOfLoading.shouldBe(Condition.visible);
         $(By.xpath("//div//span[@class='filter-block__reset-btn']")).shouldBe(Condition.visible);
-        });
         return this;
     }
 
+    @Step("Select Cooperation")
     public EmployeesPage selectCooperation(){
-        step("Select Cooperation",()->{
-            actions().moveToElement($(By.xpath("//label[contains(text(),'Сотрудничество')]"))).click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
-        return this;
-    }
-
-    public EmployeesPage selectFinishOfCooperation(){
-        step("Select Finish Cooperation",()->{$(By.xpath("//label[contains(text(),'Завершение сотрудничества')]")).click();
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Сотрудничество')]"))).click();
         labelOfLoading.shouldBe(Condition.visible);
-        });
         return this;
     }
 
+    @Step("Select Finish Cooperation")
+    public EmployeesPage selectFinishOfCooperation(){
+        $(By.xpath("//label[contains(text(),'Завершение сотрудничества')]")).click();
+        labelOfLoading.shouldBe(Condition.visible);
+        return this;
+    }
+
+    @Step("Select Team")
     public EmployeesPage selectByTeam(){
-        step("Select Team",()->listOfFilterParams.get(12).click());
+        listOfFilterParams.get(12).click();
         return this;
     }
 
+    @Step("Select By Date Of Birthday")
     public EmployeesPage selectByDateOfBirthday(){
-        step("Select By Date Of Birthday",()->listOfFilterParams.first().scrollIntoView(false).click());
+        listOfFilterParams.first().scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Birthday Month")
     public EmployeesPage selectMonthOfDateOfBirthday(){
-        step("Select Birthday Month",()-> {
-            selectParamFromDropDownContainer("Март").click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        selectParamFromDropDownContainer("Март").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select Absence From Work")
     public EmployeesPage selectByAbsenceFromWork(){
-        step("Select Absence From Work",()->listOfFilterParams.get(1).scrollIntoView(false).click());
+        listOfFilterParams.get(1).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param 'Отпуск")
     public EmployeesPage selectAbsence(){
-        step("Select Param 'Отпуск'",()->{
         selectParamFromDropDownContainer("Отпуск").click();
         labelOfLoading.shouldBe(Condition.visible);
         listOfEmployees.shouldBe(CollectionCondition.sizeGreaterThan(0));
-        });
         return this;
     }
 
+    @Step("Select Role in System")
     public EmployeesPage selectByRoleInSystem(){
-        step("Select Role in System",()->listOfFilterParams.get(2).scrollIntoView(false).click());
+        listOfFilterParams.get(2).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param 'Администратор'")
     public EmployeesPage selectRole(){
-        step("Select Param 'Администратор'",()->{
         selectParamFromDropDownContainer("Администратор").click();
         labelOfLoading.shouldBe(Condition.visible);
-        });
         return this;
     }
 
+    @Step("Select Marital Status")
     public EmployeesPage selectByMaritalStatus(){
-        step("Select Marital Status",()->listOfFilterParams.get(4).scrollIntoView(false).click());
+        listOfFilterParams.get(4).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param 'Вдовец'")
     public EmployeesPage selectMaritalStatus(){
-        step("Select Param 'Вдовец'",()-> {
-            selectParamFromDropDownContainer("Вдовец").click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        selectParamFromDropDownContainer("Вдовец").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select By Experience")
     public EmployeesPage selectByExperience(){
-        step("Select By Experience",()->listOfFilterParams.get(5).scrollIntoView(false).click());
+        listOfFilterParams.get(5).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param '10+ лет'")
     public EmployeesPage selectExperience(){
-        step("Select Param '10+ лет'",()-> {
-            selectParamFromDropDownContainer("10+ лет").click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        selectParamFromDropDownContainer("10+ лет").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select Team")
     public String selectTeam(){
-        step("Select Team");
         var listOfTeams = $$(By.xpath("//div[@class='filter-options__item']")).shouldBe(CollectionCondition.sizeGreaterThan(0));
         var team = listOfTeams.get(listOfTeams.size() - 1);
         String teamStr = team.getText();
@@ -157,163 +159,159 @@ public class EmployeesPage {
         return teamStr;
     }
 
+    @Step("Select By Place")
     public EmployeesPage selectByPlace(){
-        step("Select By Place",()->listOfFilterParams.get(6).scrollIntoView(false).click());
+        listOfFilterParams.get(6).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param 'Великобритания'")
     public EmployeesPage selectCountry(){
-        step("Select Param 'Великобритания'",()-> {
-            selectParamFromDropDownContainer("Великобритания").click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        selectParamFromDropDownContainer("Великобритания").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select By Tag")
     public EmployeesPage selectByTag(){
-        step("Select By Tag",()->listOfFilterParams.get(13).scrollIntoView(false).click());
+        listOfFilterParams.get(13).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param '.NET Core'")
     public EmployeesPage selectTag(){
-        step("Select Param '.NET Core'",()-> {
-            selectParamFromDropDownContainer(".NET Core").click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        selectParamFromDropDownContainer(".NET Core").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select By Event")
     public EmployeesPage selectByEvent(){
-        step("Select By Event",()->listOfFilterParams.get(9).scrollIntoView(false).click());
+        listOfFilterParams.get(9).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param 'Performance review'")
     public EmployeesPage selectEvent(){
-        step("Select Param 'Performance review'",()->{
         selectParamFromDropDownContainer("Performance review").click();
         labelOfLoading.shouldBe(Condition.visible);
-        });
         return this;
     }
 
+    @Step("Check Event")
     public static Boolean checkEvent(String event){
         return $(By.xpath("//div[@class='add-actions']//span[@class='badge badge-blue']")).shouldBe(Condition.visible).getText().equals(event);
     }
 
+    @Step("Select By Level")
     public EmployeesPage selectByLevel(){
-        step("Select By Level",()->listOfFilterParams.get(7).scrollIntoView(false).click());
+        listOfFilterParams.get(7).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param 'Junior'")
     public EmployeesPage selectLevel(){
-        step("Select Param 'Junior'",()->{
         selectParamFromDropDownContainer("Junior").click();
         labelOfLoading.shouldBe(Condition.visible);
-        });
         return this;
     }
 
+    @Step("Select By Responsible")
     public EmployeesPage selectByResponsible(){
-        step("Select By Responsible",()->listOfFilterParams.get(11).scrollIntoView(false).click());
+        listOfFilterParams.get(11).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param 'тест'")
     public EmployeesPage selectResponsible(){
-        step("Select Param 'тест'",()-> {
-            selectParamFromDropDownContainer("тест").click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        selectParamFromDropDownContainer("тест").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select By Skills")
     public EmployeesPage selectBySkills(){
-        step("Select By Skills",()->listOfFilterParams.get(8).scrollIntoView(false).click());
+       listOfFilterParams.get(8).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Param 'UI/UX'")
     public EmployeesPage selectSkill(){
-        step("Select Param 'UI/UX'",()-> {
-            selectParamFromDropDownContainer("UI/UX").click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        selectParamFromDropDownContainer("UI/UX").click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Click To Checkbox 'Сотрудники'")
     public EmployeesPage clickCheckBoxEmployee(){
-        step("Click To Checkbox 'Сотрудники'",()-> {
-            $$(By.xpath("//label[contains(text(),'Сотрудники')]")).last().scrollIntoView(false).click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        $$(By.xpath("//label[contains(text(),'Сотрудники')]")).last().scrollIntoView(false).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Click To Checkbox 'Бывшие сотрудники'")
     public EmployeesPage clickCheckBoxExEmployee(){
-        step("Click To Checkbox 'Бывшие сотрудники'",()-> {
-            $(By.xpath("//label[contains(text(),'Бывшие сотрудники')]")).scrollIntoView(false).click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        $(By.xpath("//label[contains(text(),'Бывшие сотрудники')]")).scrollIntoView(false).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Click To Checkbox 'Сотрудник' In Form Of Work")
     public EmployeesPage clickCheckBoxEmployeeFormOfWork(){
-        step("Click To Checkbox 'Сотрудник' In Form Of Work",()-> {
-            $(By.xpath("//label[contains(text(),'Сотрудник')]")).click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        $(By.xpath("//label[contains(text(),'Сотрудник')]")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Click To Checkbox 'Внештатный' In Form Of Work")
     public EmployeesPage clickCheckBoxWithoutFormOfWork(){
-        step("Click To Checkbox 'Внештатный' In Form Of Work",()-> {
-            $(By.xpath("//label[contains(text(),'Внештатный')]")).scrollIntoView(false).click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        $(By.xpath("//label[contains(text(),'Внештатный')]")).scrollIntoView(false).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Click To Checkbox 'ФЛП' In Form Of Work")
     public EmployeesPage clickCheckBoxFlpFormOfWork(){
-        step("Click To Checkbox 'ФЛП' In Form Of Work",()-> {
-            $(By.xpath("//label[contains(text(),'ФЛП')]")).scrollIntoView(false).click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        $(By.xpath("//label[contains(text(),'ФЛП')]")).scrollIntoView(false).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Check Ex Employee")
     public static Boolean checkExEmployee(){
         return $(By.xpath("//div[@class='add-actions']//span[@class='badge badge-red']")).shouldBe(Condition.visible).getText().equals("Бывший сотрудник");
     }
 
+    @Step("Select By Language")
     public EmployeesPage selectByLanguageSkills(){
-        step("Select By Language",()-> actions().moveToElement(listOfFilterParams.get(10)).click().perform());
+        actions().moveToElement(listOfFilterParams.get(10)).click().perform();
         return this;
     }
 
+    @Step("Select Param 'Английский'")
     public EmployeesPage selectLanguage(){
-        step("Select Param 'Английский'",()->selectParamFromDropDownContainer("Английский").click());
+        selectParamFromDropDownContainer("Английский").click();
         return this;
     }
 
+    @Step("Select Level Of Language 'Beginner'")
     public EmployeesPage selectLevelOfLanguage(){
-        step("Select Level Of Language 'Beginner' ",()->{
         selectParamFromDropDownContainer("Beginner").click();
         labelOfLoading.shouldBe(Condition.visible);
-        });
         return this;
     }
 
+    @Step("Click Checkbox 'Возраст не указан'")
     public EmployeesPage clickCheckBoxWithoutAge(){
-        step("Click Checkbox 'Возраст не указан' ",()-> {
-            actions().moveToElement($(By.xpath("//label[contains(text(),'Возраст не указан')]"))).click().perform();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Возраст не указан')]"))).click().perform();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Click Checkbox 'Задать значение'")
     public EmployeesPage clickCheckBoxAge(){
-        step("Click Checkbox 'Задать значение' ",()-> {
-            actions().moveToElement($(By.xpath("//label[contains(text(),'Задать значение')]"))).click().perform();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Задать значение')]"))).click().perform();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
@@ -333,82 +331,74 @@ public class EmployeesPage {
         return this;
     }
 
+    @Step("Click To 'Выберите дату или период'")
     public EmployeesPage clickByDateStartedWork(){
-        step("Click To 'Выберите дату или период' ",()-> {
-            actions().moveToElement($(By.xpath("//p[contains(text(),'Выберите дату или период')]"))).click();
-        });
+        $(By.xpath("//div[@class='cus-select-filter-datepicker']//p[contains(text(),'Выберите дату или период')]")).scrollIntoView(false).click();
         return this;
     }
 
+    @Step("Select Period 'Прошедший год'")
     public EmployeesPage selectPeriodLastYear(){
-        step("Select Period 'Прошедший год'",()-> {
-            $(By.xpath("//div[contains(@class,'datepicker-options')]//p[contains(text(),'Прошедший год')]")).click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        $(By.xpath("//div[contains(@class,'datepicker-options')]//p[contains(text(),'Прошедший год')]")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Click to 'Выбрать период'")
     public EmployeesPage selectPeriod(){
-        step("Click to 'Выбрать период' ",()-> $(By.xpath("//div[contains(@class,'datepicker-options')]//p[contains(text(),'Выбрать период')]")).click());
+        $(By.xpath("//div[contains(@class,'datepicker-options')]//p[contains(text(),'Выбрать период')]")).click();
         return this;
     }
 
+    @Step("Choose A Today")
     public EmployeesPage enterTodayDay(){
-        step("Choose A Today ",()-> {
-            $(By.xpath("//table//button[@type='button' and contains(@class, 'outlined')]")).click();
-            actions().sendKeys(Keys.ENTER).perform();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        $(By.xpath("//table//button[@type='button' and contains(@class, 'outlined')]")).click();
+        actions().sendKeys(Keys.ENTER).perform();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select Param 'Есть дети' ")
     public EmployeesPage selectChildrenYes(){
-        step("Select Param 'Есть дети' ",()-> {
-            actions().moveToElement($(By.xpath("//label[contains(text(),'Есть дети')]"))).click().perform();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Есть дети')]"))).click().perform();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select Param 'Нет детей'")
     public EmployeesPage selectChildrenNo(){
-        step("Select Param 'Нет детей'",()-> {
-            actions().moveToElement($(By.xpath("//label[contains(text(),'Нет детей')]"))).click().perform();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Нет детей')]"))).click().perform();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Click To Reset Button ")
     public EmployeesPage clickResetButton(){
-        step("Click To Reset Button ",()-> {
-            listOfCheckBoxes.get(RandomUtils.RandomInt(listOfCheckBoxes.size() - 1)).click();
-            labelOfLoading.shouldBe(Condition.visible);
-            $(By.xpath("//div//span[@class='filter-block__reset-btn']")).click();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        listOfCheckBoxes.get(RandomUtils.RandomInt(listOfCheckBoxes.size() - 1)).click();
+        labelOfLoading.shouldBe(Condition.visible);
+        $(By.xpath("//div//span[@class='filter-block__reset-btn']")).click();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select Checkbox 'Не выбран' ")
     public EmployeesPage clickCheckBoxWithoutSex(){
-        step("Select Checkbox 'Не выбран' ",()->{
         actions().moveToElement($(By.xpath("//label[contains(text(),'Не выбран')]"))).click().perform();
         labelOfLoading.shouldBe(Condition.visible);
-        });
         return this;
     }
 
+    @Step("Select Checkbox 'Мужской' ")
     public EmployeesPage clickCheckBoxMaleSex(){
-        step("Select Checkbox 'Мужской' ",()-> {
-            actions().moveToElement($(By.xpath("//label[contains(text(),'Мужской')]"))).click().perform();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Мужской')]"))).click().perform();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 
+    @Step("Select Checkbox 'Женский' ")
     public EmployeesPage clickCheckBoxFemaleSex(){
-        step("Select Checkbox 'Женский' ",()-> {
-            actions().moveToElement($(By.xpath("//label[contains(text(),'Женский')]"))).click().perform();
-            labelOfLoading.shouldBe(Condition.visible);
-        });
+        actions().moveToElement($(By.xpath("//label[contains(text(),'Женский')]"))).click().perform();
+        labelOfLoading.shouldBe(Condition.visible);
         return this;
     }
 

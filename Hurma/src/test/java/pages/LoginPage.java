@@ -10,17 +10,20 @@ import static com.codeborne.selenide.Selenide.$;
 public class LoginPage {
 
 
+    @Step("Enter Email")
     public LoginPage enterEmail(String emailUser){
-        step("Enter Email",()-> $(By.name("email")).sendKeys(emailUser));
+        $(By.name("email")).sendKeys(emailUser);
         return this;
     }
 
+    @Step("Enter Password")
     public LoginPage enterPassword(String password){
-        step("Enter Password",()->$(By.name("password")).sendKeys(password));
+        $(By.name("password")).sendKeys(password);
         return this;
     }
 
+    @Step("Click submit")
     public void clickSubmit(){
-        step("Click Submit",()-> $(By.xpath("//input[@type ='submit']")).click());
+        $(By.xpath("//input[@type ='submit']")).click();
     }
 }

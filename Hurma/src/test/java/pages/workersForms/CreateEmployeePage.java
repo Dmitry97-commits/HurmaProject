@@ -2,6 +2,7 @@
 package pages.workersForms;
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -9,9 +10,8 @@ import static io.qameta.allure.Allure.step;
 
 public class CreateEmployeePage {
 
-
+    @Step("Getting a name from a string")
     public static String checkCreatedByName(){
-        step("Getting a name from a string");
         return $(By.xpath("//h1[contains(@class,'mr-6')]")).shouldHave(Condition.enabled, Condition.visible).getText();
     }
 
